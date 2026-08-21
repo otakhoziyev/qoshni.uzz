@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil — Qoshni Uzz</title>
+    <meta name="description" content="Qoshni Uzz — Foydalanuvchi profili va ijaralar boshqaruvi.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';">
+    
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <a href="index.html" class="logo">
+            Qoshni <span>Uzz</span>
+        </a>
+
+        <div class="header-actions">
+            <!-- LANGUAGE SWITCHER -->
+            <div class="lang-selector">
+                <select id="langSelect" class="lang-select" aria-label="Tilni tanlang">
+                    <option value="uz">🇺🇿 UZ</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="zh">🇨🇳 中文</option>
+                </select>
+            </div>
+
+            <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Mavzuni o'zgartirish" title="Mavzu (Qorong'u / Oq / Moviy)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.7 1.3 1.5 1.5 2.5"></path>
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                </svg>
+                <span class="theme-badge" id="themeBadge">Qorong'u</span>
+            </button>
+
+            <a href="index.html" class="icon-btn" aria-label="Bosh sahifa" title="Bosh sahifa">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- ================= AUTH SCREEN (LOGIN / REGISTER) ================= -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <div class="login-logo">
+                Qoshni <span>Uzz</span>
+            </div>
+
+            <!-- MODE TOGGLE: Login vs Register -->
+            <div class="auth-mode-toggle">
+                <button type="button" class="mode-btn active" id="modeLoginBtn">Kirish</button>
+                <button type="button" class="mode-btn" id="modeRegisterBtn">Ro'yxatdan o'tish</button>
+                <span class="mode-slider"></span>
+            </div>
+
+            <!-- ===== LOGIN FORM ===== -->
+            <div id="loginSection">
+                <h2>Profilingizga kiring</h2>
+                <p class="login-subtitle">Email yoki telefon raqamingizni kiriting</p>
+
+                <!-- AUTH METHOD TABS -->
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab active" data-method="email" id="tabEmail">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 7l-10 6L2 7"></path>
+                        </svg>
+                        Email
+                    </button>
+                    <button type="button" class="auth-tab" data-method="phone" id="tabPhone">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        Telefon
+                    </button>
+                </div>
+
+                <form class="login-form" id="loginForm">
+                    <div class="login-input-group" id="emailGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 7l-10 6L2 7"></path>
+                        </svg>
+                        <input type="email" id="loginEmail" placeholder="email@misol.uz" required autocomplete="email">
+                    </div>
+
+                    <div class="login-input-group hidden" id="phoneGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <input type="tel" id="loginPhone" placeholder="+998 (__) ___-__-__" autocomplete="tel">
+                    </div>
+
+                    <div class="login-input-group" id="passwordGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input type="password" id="loginPassword" placeholder="Parolni kiriting" required autocomplete="current-password">
+                    </div>
+
+                    <a href="#" class="forgot-password" id="forgotPasswordBtn">Parolni unutdingizmi?</a>
+
+                    <div id="loginError" class="login-error"></div>
+
+                    <button type="submit" class="login-btn">
+                        <span id="loginBtnText">Davom etish</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- FORGOT PASSWORD MODAL -->
+                <div class="forgot-modal hidden" id="forgotModal">
+                    <p class="forgot-title">Parolni tiklash</p>
+                    <p class="forgot-desc" id="forgotDesc">Telefon raqamingizni kiriting, sizga parolni tiklash kodini yuboramiz.</p>
+                    <div class="login-input-group" id="forgotPhoneGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <input type="tel" id="forgotPhone" placeholder="+998 (__) ___-__-__">
+                    </div>
+                    <div class="login-input-group hidden" id="forgotEmailGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 7l-10 6L2 7"></path>
+                        </svg>
+                        <input type="email" id="forgotEmail" placeholder="email@misol.uz">
+                    </div>
+                    <button type="button" class="login-btn" id="forgotSendBtn">
+                        <span>Yuborish</span>
+                    </button>
+                    <button type="button" class="forgot-back" id="forgotBackBtn">Orqaga</button>
+                </div>
+            </div>
+
+            <!-- ===== REGISTER FORM ===== -->
+            <div id="registerSection" class="hidden">
+                <h2>Hisob yarating</h2>
+                <p class="login-subtitle">Ma'lumotlaringizni kiriting va ro'yxatdan o'ting</p>
+
+                <!-- AUTH METHOD TABS (Register) -->
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab active" data-method="email" id="regTabEmail">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 7l-10 6L2 7"></path>
+                        </svg>
+                        Email
+                    </button>
+                    <button type="button" class="auth-tab" data-method="phone" id="regTabPhone">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        Telefon
+                    </button>
+                </div>
+
+                <form class="login-form" id="registerForm">
+                    <!-- NAME -->
+                    <div class="login-input-group">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <input type="text" id="regName" placeholder="To'liq ismingiz" required autocomplete="name">
+                    </div>
+
+                    <!-- EMAIL (default) -->
+                    <div class="login-input-group" id="regEmailGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="M22 7l-10 6L2 7"></path>
+                        </svg>
+                        <input type="email" id="regEmail" placeholder="email@misol.uz" required autocomplete="email">
+                    </div>
+
+                    <!-- PHONE (hidden by default) -->
+                    <div class="login-input-group hidden" id="regPhoneGroup">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <input type="tel" id="regPhone" placeholder="+998 (__) ___-__-__" autocomplete="tel">
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="login-input-group">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input type="password" id="regPassword" placeholder="Parol yarating (kamida 6 ta belgi)" required autocomplete="new-password" minlength="6">
+                    </div>
+
+                    <!-- CONFIRM PASSWORD -->
+                    <div class="login-input-group">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <input type="password" id="regPasswordConfirm" placeholder="Parolni qaytadan kiriting" required autocomplete="new-password" minlength="6">
+                    </div>
+
+                    <div id="registerError" class="login-error"></div>
+
+                    <button type="submit" class="login-btn">
+                        <span>Ro'yxatdan o'tish</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <p class="login-note" id="loginNote">Hisobingiz yo'qmi? <a href="#" id="switchToRegister">Ro'yxatdan o'ting</a></p>
+            <p class="login-note hidden" id="registerNote">Hisobingiz bormi? <a href="#" id="switchToLogin">Kirish</a></p>
+        </div>
+    </div>
+
+    <main class="profile-main" id="profileMain" style="display:none;">
+        <div class="profile-container">
+            
+            <!-- LEFT COLUMN: USER CARD -->
+            <section class="profile-sidebar">
+                <div class="glass-card user-card">
+                    <div class="avatar-container">
+                        <div class="avatar-glow" id="avatarGlow"></div>
+                        <div class="avatar-main" id="userAvatar">
+                            <span id="avatarInitials">A</span>
+                        </div>
+                    </div>
+                    
+                    <h2 id="userNameDisplay">Ali</h2>
+                    <p class="user-role" data-i18n="user_role">Qo'shni (Ijara beruvchi)</p>
+                    
+                    <div class="user-meta">
+                        <div class="meta-item">
+                            <span class="meta-label" data-i18n="label_location">Manzil:</span>
+                            <span class="meta-val" id="userLocationDisplay">Toshkent, Yunusobod</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label" data-i18n="label_rating">Reyting:</span>
+                            <span class="meta-val rating-val">
+                                <svg viewBox="0 0 24 24" class="star-icon" fill="currentColor" width="14" height="14">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                                5.0 <small class="ratings-count" data-i18n="ratings_count">(12 ta baho)</small>
+                            </span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label" data-i18n="label_membership">A'zolik:</span>
+                            <span class="meta-val">Avgust, 2026</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary add-listing-btn" id="addListingBtn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span data-i18n="btn_add_listing">E'lon joylashtirish</span>
+                    </button>
+
+                    <button class="btn btn-secondary edit-profile-btn" id="editProfileBtn" style="width:100%;margin-top:10px;">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        <span>Profilni tahrirlash</span>
+                    </button>
+
+                    <button class="btn btn-secondary logout-btn" id="logoutBtn" style="width:100%;margin-top:10px;">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Chiqish
+                    </button>
+                </div>
+            </section>
+
+            <!-- RIGHT COLUMN: CONTENT & TABS -->
+            <section class="profile-content-area">
+                <!-- TABS HEADER -->
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="my-listings" data-i18n="tab_my_listings">
+                        Mening e'lonlarim
+                    </button>
+                    <button class="tab-btn" data-tab="my-rentals" data-i18n="tab_my_rentals">
+                        Ijaralarim
+                    </button>
+                    <button class="tab-btn" data-tab="favorites" data-i18n="tab_favorites">
+                        Sevimlilar
+                    </button>
+                    <button class="tab-btn" data-tab="settings" data-i18n="tab_settings">
+                        Sozlamalar
+                    </button>
+                </div>
+
+                <!-- TAB PANELS -->
+                <div class="tab-panels">
+                    
+                    <!-- PANEL 1: MY LISTINGS -->
+                    <div class="tab-panel active" id="my-listings">
+                        <div class="panel-header">
+                            <h3 data-i18n="header_my_listings">Faol ijaradagi e'lonlaringiz</h3>
+                        </div>
+                        <div class="profile-listings-grid" id="myListingsGrid">
+                            <!-- Javascript orqali to'ldiriladi yoki default ko'rsatiladi -->
+                        </div>
+                    </div>
+
+                    <!-- PANEL 2: MY RENTALS -->
+                    <div class="tab-panel" id="my-rentals">
+                        <div class="panel-header">
+                            <h3 data-i18n="header_my_rentals">Ijaraga olingan narsalar</h3>
+                        </div>
+                        <div class="profile-listings-grid" id="myRentalsGrid">
+                            <!-- Default ijaralar -->
+                        </div>
+                    </div>
+
+                    <!-- PANEL 3: FAVORITES -->
+                    <div class="tab-panel" id="favorites">
+                        <div class="panel-header">
+                            <h3 data-i18n="header_favorites">Tanlangan mahsulotlar (Sevimlilar)</h3>
+                        </div>
+                        <div class="profile-listings-grid" id="myFavoritesGrid">
+                            <!-- Sevimli mahsulotlar localStorage dan olinadi -->
+                        </div>
+                    </div>
+
+                    <!-- PANEL 4: SETTINGS -->
+                    <div class="tab-panel" id="settings">
+                        <div class="panel-header">
+                            <h3 data-i18n="header_settings">Profil sozlamalari</h3>
+                        </div>
+                        <form class="settings-form" id="settingsForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="settingsName" data-i18n="label_name">To'liq ismingiz</label>
+                                    <input type="text" id="settingsName" placeholder="Ismingizni kiriting" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingsPhone" data-i18n="label_phone">Telefon raqam</label>
+                                    <input type="tel" id="settingsPhone" placeholder="+998 (__) ___-__-__" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="settingsLocation" data-i18n="label_settings_location">Hudud / Manzil</label>
+                                    <select id="settingsLocation">
+                                        <option value="Toshkent, Yunusobod">Toshkent, Yunusobod</option>
+                                        <option value="Toshkent, Chilonzor">Toshkent, Chilonzor</option>
+                                        <option value="Toshkent, Mirzo Ulug‘bek">Toshkent, Mirzo Ulug‘bek</option>
+                                        <option value="Toshkent, Shayxontohur">Toshkent, Shayxontohur</option>
+                                        <option value="Toshkent, Yakkasaroy">Toshkent, Yakkasaroy</option>
+                                        <option value="Toshkent, Uchtepa">Toshkent, Uchtepa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="label_avatar_color">Profil rangi (Avatar)</label>
+                                    <div class="color-picker-grid">
+                                        <label class="color-option purple-opt">
+                                            <input type="radio" name="avatarColor" value="purple" checked>
+                                            <span class="checkmark">✓</span>
+                                        </label>
+                                        <label class="color-option pink-opt">
+                                            <input type="radio" name="avatarColor" value="pink">
+                                            <span class="checkmark">✓</span>
+                                        </label>
+                                        <label class="color-option blue-opt">
+                                            <input type="radio" name="avatarColor" value="blue">
+                                            <span class="checkmark">✓</span>
+                                        </label>
+                                        <label class="color-option orange-opt">
+                                            <input type="radio" name="avatarColor" value="orange">
+                                            <span class="checkmark">✓</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary save-settings-btn" data-i18n="btn_save_settings">Sozlamalarni saqlash</button>
+                                <span class="save-status" id="saveStatus"></span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- PANEL 5: ADD LISTING -->
+                    <div class="tab-panel" id="add-listing">
+                        <div class="panel-header">
+                            <h3 data-i18n="header_add_listing">Yangi ijaraga beriladigan e'lon qo'shish</h3>
+                        </div>
+                        <form class="add-listing-form" id="addListingForm">
+                            <div class="form-group">
+                                <label for="listingTitle" data-i18n="label_title">Mahsulot nomi</label>
+                                <input type="text" id="listingTitle" placeholder="Masalan: Velosiped, Drel, Dazmol..." required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="listingCategory" data-i18n="label_category">Kategoriya</label>
+                                    <select id="listingCategory" required>
+                                        <option value="Elektronika">Elektronika</option>
+                                        <option value="Gaming">Gaming</option>
+                                        <option value="Kamera">Kamera</option>
+                                        <option value="Asboblar">Asboblar</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Boshqa">Boshqa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingPrice" data-i18n="label_price">Ijara narxi (so'mda)</label>
+                                    <input type="number" id="listingPrice" placeholder="Masalan: 50000" min="0" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="listingPeriod" data-i18n="label_period">Ijara muddati turi</label>
+                                    <select id="listingPeriod">
+                                        <option value="kun" data-i18n="period_day">Kuniga</option>
+                                        <option value="soat" data-i18n="period_hour">Soatiga</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="listingVisual" data-i18n="label_visual">Zahira ikonka (Rasm bo'lmasa)</label>
+                                    <select id="listingVisual">
+                                        <option value="drill">Drel (Asboblar)</option>
+                                        <option value="bicycle">Velosiped (Transport)</option>
+                                        <option value="laptop">Noutbuk (Elektronika)</option>
+                                        <option value="camera">Kamera</option>
+                                        <option value="box">Quti (Boshqa)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- MAHSULOT RASMI YUKLASH BO'LIMI -->
+                            <div class="form-group">
+                                <label data-i18n="label_image">Mahsulot rasmi</label>
+                                <div class="image-upload-wrapper">
+                                    <input type="file" id="listingImageInput" accept="image/*" class="file-input-hidden">
+                                    <div class="image-upload-box" id="imageUploadBox">
+                                        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                            <polyline points="21 15 16 10 5 21"></polyline>
+                                        </svg>
+                                        <p data-i18n="text_upload_drag">Rasm faylini tanlash yoki bu yerga tashlash</p>
+                                        <small>PNG, JPG, WEBP, GIF formats</small>
+                                    </div>
+                                    <div class="image-url-divider" data-i18n="text_url_or">yoki Rasm havolasini (URL) kiriting:</div>
+                                    <input type="url" id="listingImageUrl" placeholder="https://example.com/rasm.jpg">
+                                    
+                                    <div class="image-preview-container hidden" id="imagePreviewContainer">
+                                        <img id="imagePreview" src="" alt="Mahsulot rasmi prevyusi">
+                                        <button type="button" class="btn-remove-image" id="removeImageBtn" title="Rasmni o'chirish">&times;</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary" data-i18n="btn_post_listing">E'lonni joylashtirish</button>
+                                <button type="button" class="btn btn-secondary" id="cancelAddListingBtn" data-i18n="btn_cancel">Bekor qilish</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    Qoshni <span>Uzz</span>
+                </a>
+                <p>Kerakli narsani ijaraga ol.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#">Yordam</a>
+                <span class="separator">•</span>
+                <a href="#">Biz haqimizda</a>
+                <span class="separator">•</span>
+                <a href="#">Aloqa</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Telegram">Telegram</a>
+                <span class="separator">•</span>
+                <a href="#" aria-label="Instagram">Instagram</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Qoshni Uzz</span>
+        </div>
+    </footer>
+
+    <script src="common.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

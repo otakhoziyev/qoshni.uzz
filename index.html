@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qoshni Uzz — Kerakli narsani ijaraga ol</title>
+    <meta name="description" content="Qoshni Uzz — odamlar kerakli narsalarni yaqinidan ijaraga oladigan zamonaviy va qulay marketplace.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self';">
+    
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="header">
+        <a href="#" class="logo">
+            Qoshni <span>Uzz</span>
+        </a>
+
+        <div class="header-actions">
+            <!-- LANGUAGE SWITCHER -->
+            <div class="lang-selector">
+                <select id="langSelect" class="lang-select" aria-label="Tilni tanlang">
+                    <option value="uz">🇺🇿 UZ</option>
+                    <option value="ru">🇷🇺 RU</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="zh">🇨🇳 中文</option>
+                </select>
+            </div>
+
+            <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Mavzuni o'zgartirish" title="Mavzu (Qorong'u / Oq / Moviy)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.7 1.3 1.5 1.5 2.5"></path>
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                </svg>
+                <span class="theme-badge" id="themeBadge">Qorong'u</span>
+            </button>
+
+            <button class="icon-btn" aria-label="Qidirish" id="searchBtn">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="21" y1="21" x2="16.25" y2="16.25"></line>
+                </svg>
+            </button>
+
+            <a href="profile.html" class="icon-btn" aria-label="Profil" id="profileBtn">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ================= HERO SEARCH SECTION ================= -->
+        <section class="hero-search-section">
+            <div class="hero-search-container">
+                <h1 data-i18n="hero_title">
+                    Kerakli narsalarni <span>ijaraga</span> ol.
+                </h1>
+                <p data-i18n="hero_subtitle">
+                    Qoshningizdagidan osongina toping va ijaraga oling.
+                </p>
+
+                <!-- SEARCH FORM -->
+                <form class="search-box uzum-search" id="searchForm">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="7"></circle>
+                        <line x1="21" y1="21" x2="16.25" y2="16.25"></line>
+                    </svg>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Nima kerak? Masalan: Velosiped, Drel, Kalonka..."
+                        data-i18n-placeholder="search_placeholder"
+                        autocomplete="off"
+                        aria-label="Mahsulot qidirish"
+                    >
+
+                    <button type="submit" class="search-submit" aria-label="Qidirish">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+
+
+        <!-- ================= CAROUSEL / BANNER ================= -->
+        <section class="carousel-section">
+            <div class="carousel-container" id="carouselContainer">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- JS orqali to'ldiriladi (bannerData.json dan) -->
+                </div>
+                <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="Oldingi">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="carousel-btn carousel-next" id="carouselNext" aria-label="Keyingi">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </section>
+
+        <!-- ================= CATEGORIES ================= -->
+        <section class="categories-section">
+            <div class="categories" id="categories">
+
+                <button class="category-card" data-category="Elektronika">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_elec">Elektronika</span>
+                </button>
+
+                <button class="category-card" data-category="Gaming">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="6" y1="12" x2="10" y2="12"></line>
+                            <line x1="8" y1="10" x2="8" y2="14"></line>
+                            <circle cx="15" cy="13" r="1" fill="currentColor"></circle>
+                            <circle cx="17.5" cy="10.5" r="1" fill="currentColor"></circle>
+                            <path d="M17.3 5H6.7C3.6 5 2 7.7 2 11c0 3.3 2 7 5.5 7 1.2 0 2.2-.6 2.8-1.5L12 14.5l1.7 2c.6.9 1.6 1.5 2.8 1.5 3.5 0 5.5-3.7 5.5-7 0-3.3-1.6-6-4.7-6z"></path>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_gaming">Gaming</span>
+                </button>
+
+                <button class="category-card" data-category="Kamera">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                            <circle cx="12" cy="13" r="4"></circle>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_camera">Kamera</span>
+                </button>
+
+                <button class="category-card" data-category="Asboblar">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_tools">Asboblar</span>
+                </button>
+
+                <button class="category-card" data-category="Transport">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                            <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                            <path d="M15 6h2a2 2 0 0 1 2 2v7"></path>
+                            <path d="M12 18V9a1 1 0 0 1 1-1h3"></path>
+                            <path d="M5.5 17.5L9 9h3"></path>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_transport">Transport</span>
+                </button>
+
+                <button class="category-card" data-category="Boshqa">
+                    <span class="category-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+                            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                        </svg>
+                    </span>
+                    <span data-i18n="cat_other">Boshqa</span>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- ================= POPULAR RENTALS ================= -->
+        <section class="popular-section">
+
+            <div class="section-heading">
+                <h2 data-i18n="popular_title">Mashhur ijaralar</h2>
+                <a href="#" class="view-all">
+                    <span data-i18n="btn_view_all">Barchasini ko‘rish</span>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+
+                <!-- PRODUCT 1 -->
+                <article
+                    class="product-card"
+                    data-name="MacBook Pro 14"
+                    data-category="Elektronika"
+                >
+                    <button class="favorite-btn" aria-label="Sevimlilarga qo‘shish">
+                        ♡
+                    </button>
+
+                    <div class="product-image">
+                        <div class="macbook">
+                            <div class="mac-screen"></div>
+                            <div class="mac-base"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <h3>MacBook Pro 14"</h3>
+
+                        <strong class="product-price">
+                            200 000 so‘m
+                            <small data-i18n="per_hour">/ soat</small>
+                        </strong>
+
+                        <div class="product-meta">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Toshkent, Yunusobod</span>
+                        </div>
+
+                        <div class="rating">
+                            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>4.9</span>
+                            <small>(23)</small>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 2 -->
+                <article
+                    class="product-card"
+                    data-name="PlayStation 5"
+                    data-category="Gaming"
+                >
+                    <button class="favorite-btn" aria-label="Sevimlilarga qo‘shish">
+                        ♡
+                    </button>
+
+                    <div class="product-image">
+                        <div class="ps5">
+                            <div class="ps5-console"></div>
+                            <div class="ps5-controller"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <h3>PlayStation 5</h3>
+
+                        <strong class="product-price">
+                            150 000 so‘m
+                            <small data-i18n="per_day">/ kun</small>
+                        </strong>
+
+                        <div class="product-meta">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Toshkent, Chilonzor</span>
+                        </div>
+
+                        <div class="rating">
+                            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>4.8</span>
+                            <small>(18)</small>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 3 -->
+                <article
+                    class="product-card"
+                    data-name="Canon EOS R6"
+                    data-category="Kamera"
+                >
+                    <button class="favorite-btn" aria-label="Sevimlilarga qo‘shish">
+                        ♡
+                    </button>
+
+                    <div class="product-image">
+                        <div class="camera-product">
+                            <div class="camera-product-body">
+                                <div class="camera-product-lens"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <h3>Canon EOS R6</h3>
+
+                        <strong class="product-price">
+                            180 000 so‘m
+                            <small data-i18n="per_day">/ kun</small>
+                        </strong>
+
+                        <div class="product-meta">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Toshkent, Mirzo Ulug‘bek</span>
+                        </div>
+
+                        <div class="rating">
+                            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>4.9</span>
+                            <small>(15)</small>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 4 -->
+                <article
+                    class="product-card"
+                    data-name="BenQ Proyektor"
+                    data-category="Elektronika"
+                >
+                    <button class="favorite-btn" aria-label="Sevimlilarga qo‘shish">
+                        ♡
+                    </button>
+
+                    <div class="product-image">
+                        <div class="projector">
+                            <div class="projector-lens"></div>
+                            <div class="projector-light"></div>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <h3 data-i18n="benq_projector">Proyektor BenQ</h3>
+
+                        <strong class="product-price">
+                            100 000 so‘m
+                            <small data-i18n="per_day">/ kun</small>
+                        </strong>
+
+                        <div class="product-meta">
+                            <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Toshkent, Shayxontohur</span>
+                        </div>
+
+                        <div class="rating">
+                            <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>4.7</span>
+                            <small>(12)</small>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <a href="#" class="footer-logo">
+                    Qoshni <span>Uzz</span>
+                </a>
+                <p data-i18n="footer_slogan">Kerakli narsani ijaraga ol.</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#" data-i18n="footer_help">Yordam</a>
+                <span class="separator">•</span>
+                <a href="#" data-i18n="footer_about">Biz haqimizda</a>
+                <span class="separator">•</span>
+                <a href="https://wa.me/998777444720?text=Assalomu%20alaykum!%20Qoshni%20Uzz%20haqida%20ma%27lumot%20olmoqchiman." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-i18n="footer_contact">Aloqa</a>
+                <span class="separator">•</span>
+                <a href="tel:+998777444720" class="footer-phone">📞 +998 77 744 47 20</a>
+            </div>
+
+            <div class="footer-social">
+                <a href="https://t.me/otakoz1yev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a>
+                <span class="separator">•</span>
+                <a href="https://instagram.com/qoshni.uzz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Qoshni Uzz</span>
+        </div>
+    </footer>
+
+    <!-- ================= PRODUCT DETAIL MODAL ================= -->
+    <div class="product-modal-overlay" id="productModal">
+        <div class="product-modal">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Yopish">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="modal-body">
+                <!-- Left: Product Visual -->
+                <div class="modal-image" id="modalImage"></div>
+
+                <!-- Right: Product Details -->
+                <div class="modal-details">
+                    <span class="modal-category" id="modalCategory"></span>
+                    <h2 class="modal-title" id="modalTitle"></h2>
+
+                    <div class="modal-rating" id="modalRating">
+                        <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span id="modalRatingValue"></span>
+                        <small id="modalReviews"></small>
+                    </div>
+
+                    <div class="modal-price-block">
+                        <span class="modal-price" id="modalPrice"></span>
+                        <span class="modal-period" id="modalPeriod"></span>
+                    </div>
+
+                    <div class="modal-location">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span id="modalLocation"></span>
+                    </div>
+
+                    <p class="modal-description" id="modalDescription"></p>
+
+                    <div class="modal-actions">
+                        <a class="modal-btn-telegram" id="modalTelegram" href="https://t.me/otakoz1yev" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                            </svg>
+                            Telegram
+                        </a>
+                        <div class="modal-phone">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            <a href="tel:+998777444720">+998 77 744 47 20</a>
+                        </div>
+                        <button class="modal-btn-favorite" id="modalFavoriteBtn">
+                            ♡ Sevimlilarga qo'shish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
